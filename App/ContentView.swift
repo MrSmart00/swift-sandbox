@@ -6,23 +6,36 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
-public struct ContentView: View {
-    public init() { }
+struct ContentView: View {
     
-    public var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+    let store: Store<ContentStore.State, ContentStore.Action>
+    
+    var body: some View {
+        WithViewStore(store) { viewStore in
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text(viewStore.text)
+            }
+            .padding()
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(
+            store: .init(
+                initialState: .init(),
+                reducer: ContentStore.reducer,
+                environment: .init()
+            )
+        )
     }
 }

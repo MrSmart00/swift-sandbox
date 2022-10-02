@@ -12,7 +12,7 @@ import App
 struct SandboxApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView(with: .init())
         }
     }
 }
