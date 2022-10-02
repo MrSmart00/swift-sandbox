@@ -24,17 +24,14 @@ public struct RootView: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             ZStack {
-                if !viewStore.isReady {
-//                    VStack {
-//                        Text("Initializing...")
-//                    }
-                    ZStack(alignment: .center) {
-                        Color(.black)
-                            .opacity(0.3)
-                            .ignoresSafeArea()
-                        IndicatorView()
-                    }
-                } else {
+                IfLetStore(
+                    store.scope(
+                        state: \.splash,
+                        action: RootStore.Action.splash
+                    )
+                ) { store in
+                    SplashView(store: store)
+                } else: {
                     ContentView(
                         store: store.scope(
                             state: \.content,
@@ -43,15 +40,12 @@ public struct RootView: View {
                     )
                 }
             }
-//            .onAppear {
-//                viewStore.send(.onAppear)
-//            }
         }
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(with: .init())
+        RootView(with: .init(queue: .main))
     }
 }
