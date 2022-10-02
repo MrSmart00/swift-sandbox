@@ -25,8 +25,14 @@ public struct RootView: View {
         WithViewStore(store) { viewStore in
             ZStack {
                 if !viewStore.isReady {
-                    VStack {
-                        Text("Initializing...")
+//                    VStack {
+//                        Text("Initializing...")
+//                    }
+                    ZStack(alignment: .center) {
+                        Color(.black)
+                            .opacity(0.3)
+                            .ignoresSafeArea()
+                        IndicatorView()
                     }
                 } else {
                     ContentView(
@@ -37,9 +43,9 @@ public struct RootView: View {
                     )
                 }
             }
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
+//            .onAppear {
+//                viewStore.send(.onAppear)
+//            }
         }
     }
 }
