@@ -34,7 +34,7 @@ enum SplashStore {
                 try await dependency.queue.sleep(for: 1)
                 return .onComplete
             }
-            .cancellable(id: CancelID.self, cancelInFlight: true)
+            .cancellable(id: CancelID.self)
         case .onComplete:
             return .none
         }

@@ -14,7 +14,7 @@ public enum RootStore {
         var content = ContentStore.State()
     }
     
-    enum Action {
+    enum Action: Equatable {
         case splash(SplashStore.Action)
         case content(ContentStore.Action)
     }
