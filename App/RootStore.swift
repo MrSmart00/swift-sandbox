@@ -29,9 +29,16 @@ public enum RootStore {
             case .onAppear:
                 state.isReady = true
                 return .none
-            default:
+            case let .content(contentAction):
+                print(contentAction)
                 return .none
             }
-        }
+        },
+        ContentStore.reducer
+            .pullback(
+                state: \.content,
+                action: /RootStore.Action.content,
+                environment: { _ in .init() }
+            )
     )
 }

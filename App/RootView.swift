@@ -25,7 +25,9 @@ public struct RootView: View {
         WithViewStore(store) { viewStore in
             ZStack {
                 if !viewStore.isReady {
-                    Text("Initializing...")
+                    VStack {
+                        Text("Initializing...")
+                    }
                 } else {
                     ContentView(
                         store: store.scope(
