@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 public enum RootStore {
     struct State: Equatable {
-        var splash: SplashStore.State? = .init()
+        var splash = SplashStore.State()
         var content = ContentStore.State()
     }
     
@@ -30,20 +30,11 @@ public enum RootStore {
     static let reducer = Reducer<State, Action, Dependency>.combine(
         .init { state, action, dependency in
             switch action {
-            case let .splash(childAction):
-                switch childAction {
-                case .onComplete:
-                    state.splash = nil
-                default:
-                    break
-                }
-                return .none
             default:
                 return .none
             }
         },
         SplashStore.reducer
-            .optional()
             .pullback(
                 state: \.splash,
                 action: /RootStore.Action.splash,

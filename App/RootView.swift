@@ -24,18 +24,18 @@ public struct RootView: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             ZStack {
-                IfLetStore(
-                    store.scope(
-                        state: \.splash,
-                        action: RootStore.Action.splash
-                    )
-                ) { store in
-                    SplashView(store: store)
-                } else: {
+                if viewStore.splash.isCompleted {
                     ContentView(
                         store: store.scope(
                             state: \.content,
                             action: RootStore.Action.content
+                        )
+                    )
+                } else {
+                    SplashView(
+                        store: store.scope(
+                            state: \.splash,
+                            action: RootStore.Action.splash
                         )
                     )
                 }
