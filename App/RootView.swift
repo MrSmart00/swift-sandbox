@@ -25,10 +25,16 @@ public struct RootView: View {
         WithViewStore(store) { viewStore in
             ZStack {
                 if viewStore.splash.isCompleted {
-                    ContentView(
+//                    ContentView(
+//                        store: store.scope(
+//                            state: \.content,
+//                            action: RootStore.Action.content
+//                        )
+//                    )
+                    SignupView(
                         store: store.scope(
-                            state: \.content,
-                            action: RootStore.Action.content
+                            state: \.signup,
+                            action: RootStore.Action.signup
                         )
                     )
                 } else {

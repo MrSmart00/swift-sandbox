@@ -11,11 +11,13 @@ import ComposableArchitecture
 public enum RootStore {
     struct State: Equatable {
         var splash = SplashStore.State()
+        var signup = SignupStore.State()
         var content = ContentStore.State()
     }
     
     enum Action: Equatable {
         case splash(SplashStore.Action)
+        case signup(SignupStore.Action)
         case content(ContentStore.Action)
     }
     
@@ -39,6 +41,12 @@ public enum RootStore {
                 state: \.splash,
                 action: /RootStore.Action.splash,
                 environment: { .init(queue: $0.queue) }
+            ),
+        SignupStore.reducer
+            .pullback(
+                state: \.signup,
+                action: /RootStore.Action.signup,
+                environment: { _ in .init() }
             ),
         ContentStore.reducer
             .pullback(

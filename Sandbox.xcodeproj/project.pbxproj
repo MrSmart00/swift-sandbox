@@ -14,6 +14,9 @@
 		2971F5FA28EB10F400D67D11 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2971F5F928EB10F400D67D11 /* FirebaseCrashlytics */; };
 		2971F5FC28EB124000D67D11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2971F5FB28EB124000D67D11 /* GoogleService-Info.plist */; };
 		2971F5FE28EB143300D67D11 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2971F5FD28EB143300D67D11 /* FirebaseAuth */; };
+		2971F60228EB189000D67D11 /* SignupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2971F60128EB189000D67D11 /* SignupStore.swift */; };
+		2971F60428EB1D0800D67D11 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2971F60328EB1D0800D67D11 /* SignupView.swift */; };
+		2971F60728EB1F7200D67D11 /* Focuser in Frameworks */ = {isa = PBXBuildFile; productRef = 2971F60628EB1F7200D67D11 /* Focuser */; };
 		297B3BAE28E9CB0B0019411A /* SplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297B3BAD28E9CB0B0019411A /* SplashTests.swift */; };
 		297B3BB028E9CF8B0019411A /* ContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297B3BAF28E9CF8B0019411A /* ContentTests.swift */; };
 		297B3BB228E9D0650019411A /* RootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297B3BB128E9D0650019411A /* RootTests.swift */; };
@@ -67,6 +70,8 @@
 		2941432B28E9AAFD0035E2D4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		2941432D28E9AB0C0035E2D4 /* SplashStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashStore.swift; sourceTree = "<group>"; };
 		2971F5FB28EB124000D67D11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2971F60128EB189000D67D11 /* SignupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStore.swift; sourceTree = "<group>"; };
+		2971F60328EB1D0800D67D11 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		297B3BAD28E9CB0B0019411A /* SplashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTests.swift; sourceTree = "<group>"; };
 		297B3BAF28E9CF8B0019411A /* ContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTests.swift; sourceTree = "<group>"; };
 		297B3BB128E9D0650019411A /* RootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTests.swift; sourceTree = "<group>"; };
@@ -98,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2971F60728EB1F7200D67D11 /* Focuser in Frameworks */,
 				C4DEA78028E942F1006C6D02 /* ComposableArchitecture in Frameworks */,
 				2971F5FE28EB143300D67D11 /* FirebaseAuth in Frameworks */,
 			);
@@ -149,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				C476EC3B28E940F1009A2559 /* App.h */,
+				2971F60328EB1D0800D67D11 /* SignupView.swift */,
+				2971F60128EB189000D67D11 /* SignupStore.swift */,
 				C476EC2528E93FE2009A2559 /* ContentView.swift */,
 				C4DEA78528E94823006C6D02 /* ContentStore.swift */,
 				C4DEA78128E94611006C6D02 /* RootView.swift */,
@@ -232,6 +240,7 @@
 			packageProductDependencies = (
 				C4DEA77F28E942F1006C6D02 /* ComposableArchitecture */,
 				2971F5FD28EB143300D67D11 /* FirebaseAuth */,
+				2971F60628EB1F7200D67D11 /* Focuser */,
 			);
 			productName = App;
 			productReference = C476EC3928E940F1009A2559 /* App.framework */;
@@ -288,6 +297,7 @@
 			packageReferences = (
 				C476EC3128E940A9009A2559 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2971F60528EB1F7200D67D11 /* XCRemoteSwiftPackageReference "swift-focuser" */,
 			);
 			productRefGroup = C476EC2128E93FE2009A2559 /* Products */;
 			projectDirPath = "";
@@ -340,10 +350,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2971F60428EB1D0800D67D11 /* SignupView.swift in Sources */,
 				C4DEA78228E94611006C6D02 /* RootView.swift in Sources */,
 				2941432E28E9AB0C0035E2D4 /* SplashStore.swift in Sources */,
 				C4DEA78628E94823006C6D02 /* ContentStore.swift in Sources */,
 				C4DEA78428E94627006C6D02 /* RootStore.swift in Sources */,
+				2971F60228EB189000D67D11 /* SignupStore.swift in Sources */,
 				C4DEA77828E942B7006C6D02 /* ContentView.swift in Sources */,
 				2941432A28E990820035E2D4 /* IndicatorView.swift in Sources */,
 				2941432C28E9AAFD0035E2D4 /* SplashView.swift in Sources */,
@@ -704,6 +716,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		2971F60528EB1F7200D67D11 /* XCRemoteSwiftPackageReference "swift-focuser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/art-technologies/swift-focuser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		C476EC3128E940A9009A2559 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:pointfreeco/swift-composable-architecture.git";
@@ -729,6 +749,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		2971F60628EB1F7200D67D11 /* Focuser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2971F60528EB1F7200D67D11 /* XCRemoteSwiftPackageReference "swift-focuser" */;
+			productName = Focuser;
 		};
 		C4DEA77F28E942F1006C6D02 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
