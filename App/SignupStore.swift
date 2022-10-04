@@ -11,7 +11,7 @@ import Focuser
 import FirebaseAuth
 
 enum SignupStore {
-    struct Error: Swift.Error {
+    struct Error: Swift.Error, Equatable {
         let message: String
     }
     
@@ -46,6 +46,7 @@ enum SignupStore {
         case binding(BindingAction<State>)
         case tappedSignUp
         case fetchedUserInfo(String)
+        case failedUserInfo(Error)
         case alertDismissed
     }
     
@@ -68,7 +69,6 @@ enum SignupStore {
             } else if state.password.isEmpty {
                 state.focusedField = .password
             }
-//            return .none
             return .run { [email = state.email, password = state.password] send in
                 let userId = try await withCheckedThrowingContinuation { continuation in
                     Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -77,16 +77,19 @@ enum SignupStore {
                             continuation.resume(returning: user.uid)
                         } else if let nsError = error as? NSError {
                             print(nsError.userInfo)
-                            continuation.resume(throwing: Error(message: nsError.userInfo[""] as! String))
+                            continuation.resume(throwing: Error(message: nsError.userInfo["NSLocalizedDescription"] as! String))
                         }
                     }
                 }
                 await send(.fetchedUserInfo(userId))
-            } catch: { _, _ in
+            } catch: { error, send in
+                await send(.failedUserInfo(error as! SignupStore.Error))
             }
             .cancellable(id: CancelID.self)
-        case let .fetchedUserInfo(userId):
-            print(userId)
+        case .fetchedUserInfo:
+            return .none
+        case let .failedUserInfo(error):
+            state.alert = .init(title: .init(error.message))
             return .none
         }
     }.binding()

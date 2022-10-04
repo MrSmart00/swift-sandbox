@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 enum ContentStore {
     struct State: Equatable {
+        var userId: String?
         var text = ""
     }
     

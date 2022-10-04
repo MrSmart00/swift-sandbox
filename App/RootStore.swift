@@ -32,6 +32,14 @@ public enum RootStore {
     static let reducer = Reducer<State, Action, Dependency>.combine(
         .init { state, action, dependency in
             switch action {
+            case let .signup(act):
+                switch act {
+                case let .fetchedUserInfo(userId):
+                    state.content.userId = userId
+                default:
+                    break
+                }
+                return .none
             default:
                 return .none
             }

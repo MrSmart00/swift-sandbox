@@ -35,6 +35,10 @@ struct SignupView: View {
             .padding()
             .textFieldStyle(.roundedBorder)
         }
+        .alert(
+            store.scope(state: \.alert),
+            dismiss: .alertDismissed
+        )
     }
 }
 
