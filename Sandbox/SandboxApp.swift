@@ -8,13 +8,19 @@
 import SwiftUI
 import App
 import Firebase
+import Domain
 
 @main
 struct SandboxApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            RootView(with: .init(queue: .main))
+            RootView(
+                with: .init(
+                    authentication: AuthenticationService(),
+                    queue: .main
+                )
+            )
         }
     }
 }

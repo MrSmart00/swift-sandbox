@@ -7,24 +7,30 @@
 
 import Foundation
 import ComposableArchitecture
+import Domain
 
 public enum RootStore {
     struct State: Equatable {
         var splash = SplashStore.State()
-        var signup = SignupStore.State()
+        var signup = AuthenticationStore.State()
         var content = ContentStore.State()
     }
     
     enum Action: Equatable {
         case splash(SplashStore.Action)
-        case signup(SignupStore.Action)
+        case signup(AuthenticationStore.Action)
         case content(ContentStore.Action)
     }
     
     public struct Dependency {
+        var authentication: AuthenticationProtocol
         var queue: AnySchedulerOf<DispatchQueue>
         
-        public init(queue: AnySchedulerOf<DispatchQueue>) {
+        public init(
+            authentication: AuthenticationProtocol,
+            queue: AnySchedulerOf<DispatchQueue>
+        ) {
+            self.authentication = authentication
             self.queue = queue
         }
     }
@@ -34,8 +40,8 @@ public enum RootStore {
             switch action {
             case let .signup(act):
                 switch act {
-                case let .fetchedUserInfo(userId):
-                    state.content.userId = userId
+                case let .fetchedUserInfo(userInfo):
+                    state.content.userInfo = userInfo
                 default:
                     break
                 }
@@ -50,11 +56,11 @@ public enum RootStore {
                 action: /RootStore.Action.splash,
                 environment: { .init(queue: $0.queue) }
             ),
-        SignupStore.reducer
+        AuthenticationStore.reducer
             .pullback(
                 state: \.signup,
                 action: /RootStore.Action.signup,
-                environment: { _ in .init() }
+                environment: { .init(authentication: $0.authentication) }
             ),
         ContentStore.reducer
             .pullback(

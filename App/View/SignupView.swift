@@ -8,10 +8,11 @@
 import SwiftUI
 import ComposableArchitecture
 import Focuser
+import Domain
 
 struct SignupView: View {
-    let store: Store<SignupStore.State, SignupStore.Action>
-    @FocusStateLegacy var focusedField: SignupStore.State.Field?
+    let store: Store<AuthenticationStore.State, AuthenticationStore.Action>
+    @FocusStateLegacy var focusedField: AuthenticationStore.State.Field?
     
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -43,12 +44,22 @@ struct SignupView: View {
 }
 
 struct SignupView_Previews: PreviewProvider {
+    struct MockAuth: AuthenticationProtocol {
+        func signup(email: String, password: String) async throws -> Domain.UserInfo {
+            .init(userId: "USER ID", email: .init(rawValue: "aaa@bbb.com")!)
+        }
+        
+        func signin() async throws {
+            
+        }
+    }
+
     static var previews: some View {
         SignupView(
             store: .init(
                 initialState: .init(),
-                reducer: SignupStore.reducer,
-                environment: .init()
+                reducer: AuthenticationStore.reducer,
+                environment: .init(authentication: MockAuth())
             )
         )
     }

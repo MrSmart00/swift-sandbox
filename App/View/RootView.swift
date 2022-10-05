@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Domain
 
 public struct RootView: View {
     public init(with dependency: RootStore.Dependency) {
@@ -26,7 +27,7 @@ public struct RootView: View {
             ZStack {
                 if viewStore.splash.isCompleted {
                     IfLetStore(
-                        store.scope(state: \.content.userId),
+                        store.scope(state: \.content.userInfo),
                         then: { _ in
                             ContentView(
                                 store: store.scope(
@@ -58,7 +59,17 @@ public struct RootView: View {
 }
 
 struct RootView_Previews: PreviewProvider {
+    struct MockAuth: AuthenticationProtocol {
+        func signup(email: String, password: String) async throws -> Domain.UserInfo {
+            .init(userId: "USER ID!!!", email: .init(rawValue: "aaa@bbb.com")!)
+        }
+        
+        func signin() async throws {
+            
+        }
+    }
+
     static var previews: some View {
-        RootView(with: .init(queue: .main))
+        RootView(with: .init(authentication: MockAuth(), queue: .main))
     }
 }

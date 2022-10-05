@@ -20,8 +20,10 @@ struct ContentView: View {
                     .foregroundColor(.accentColor)
                 Text(viewStore.text)
                     .padding()
-                if let userId = viewStore.userId {
-                    Text(userId)
+                if let userInfo = viewStore.userInfo {
+                    Text(userInfo.email.rawValue)
+                        .font(.caption)
+                    Text(userInfo.userId)
                         .font(.caption)
                 }
             }
@@ -37,7 +39,12 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
             store: .init(
-                initialState: .init(userId: "aaaaa"),
+                initialState: .init(
+                    userInfo: .init(
+                        userId: "hogehoge",
+                        email: .init(rawValue: "aaa@bbb.com")!
+                    )
+                ),
                 reducer: ContentStore.reducer,
                 environment: .init()
             )
