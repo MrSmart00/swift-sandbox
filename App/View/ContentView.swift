@@ -19,6 +19,13 @@ struct ContentView: View {
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                 Text(viewStore.text)
+                    .padding()
+                if let userInfo = viewStore.userInfo {
+                    Text(userInfo.email.rawValue)
+                        .font(.caption)
+                    Text(userInfo.userId)
+                        .font(.caption)
+                }
             }
             .padding()
             .onAppear {
@@ -32,7 +39,12 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(
             store: .init(
-                initialState: .init(),
+                initialState: .init(
+                    userInfo: .init(
+                        userId: "hogehoge",
+                        email: .init(rawValue: "aaa@bbb.com")!
+                    )
+                ),
                 reducer: ContentStore.reducer,
                 environment: .init()
             )
