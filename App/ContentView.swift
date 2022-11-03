@@ -8,6 +8,12 @@
 import SwiftUI
 import ComposableArchitecture
 
+extension ViewFactory {
+    static func create(_ store: StoreOf<ContentStore>) -> some View {
+        ContentView(store: store)
+    }
+}
+
 struct ContentView: View {
     
     let store: StoreOf<ContentStore>
