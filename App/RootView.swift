@@ -24,18 +24,19 @@ public struct RootView: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             ZStack {
-                if viewStore.splash.isCompleted {
-                    ViewFactory.create(
-                        store.scope(
-                            state: \.content,
-                            action: RootStore.Action.content
-                        )
-                    )
-                } else {
+                switch viewStore.state.progress {
+                case .splash:
                     ViewFactory.create(
                         store.scope(
                             state: \.splash,
                             action: RootStore.Action.splash
+                        )
+                    )
+                case .content:
+                    ViewFactory.create(
+                        store.scope(
+                            state: \.content,
+                            action: RootStore.Action.content
                         )
                     )
                 }

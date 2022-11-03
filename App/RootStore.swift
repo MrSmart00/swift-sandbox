@@ -9,7 +9,13 @@ import Foundation
 import ComposableArchitecture
 
 public enum RootStore: StoreProtocol {
+    enum Progress {
+        case splash
+        case content
+    }
+    
     struct State: Equatable {
+        var progress: Progress = .splash
         var splash = SplashStore.State()
         var content = ContentStore.State()
     }
@@ -30,9 +36,12 @@ public enum RootStore: StoreProtocol {
     static let reducer = Reducer<State, Action, Dependency>.combine(
         .init { state, action, dependency in
             switch action {
+            case .splash(let child) where child == .onComplete:
+                state.progress = .content
             default:
-                return .none
+                break
             }
+            return .none
         },
         SplashStore.reducer
             .pullback(

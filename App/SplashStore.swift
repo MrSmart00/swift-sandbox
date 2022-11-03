@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 enum SplashStore: StoreProtocol {
     struct State: Equatable {
-        var isCompleted = false
+        
     }
     
     enum Action {
@@ -37,7 +37,6 @@ enum SplashStore: StoreProtocol {
             }
             .cancellable(id: CancelID.self)
         case .onComplete:
-            state.isCompleted = true
             return .none
         }
     }
