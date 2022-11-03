@@ -25,15 +25,15 @@ public struct RootView: View {
         WithViewStore(store) { viewStore in
             ZStack {
                 if viewStore.splash.isCompleted {
-                    ContentView(
-                        store: store.scope(
+                    ViewFactory.create(
+                        store.scope(
                             state: \.content,
                             action: RootStore.Action.content
                         )
                     )
                 } else {
-                    SplashView(
-                        store: store.scope(
+                    ViewFactory.create(
+                        store.scope(
                             state: \.splash,
                             action: RootStore.Action.splash
                         )
