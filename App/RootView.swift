@@ -19,7 +19,7 @@ public struct RootView: View {
         )
     }
     
-    let store: Store<RootStore.State, RootStore.Action>
+    let store: StoreOf<RootStore>
     
     public var body: some View {
         WithViewStore(store) { viewStore in

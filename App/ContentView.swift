@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct ContentView: View {
     
-    let store: Store<ContentStore.State, ContentStore.Action>
+    let store: StoreOf<ContentStore>
     
     var body: some View {
         WithViewStore(store) { viewStore in

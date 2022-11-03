@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-enum ContentStore {
+enum ContentStore: StoreProtocol {
     struct State: Equatable {
         var text = ""
     }

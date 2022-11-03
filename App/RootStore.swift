@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-public enum RootStore {
+public enum RootStore: StoreProtocol {
     struct State: Equatable {
         var splash = SplashStore.State()
         var content = ContentStore.State()

@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-enum SplashStore {
+enum SplashStore: StoreProtocol {
     struct State: Equatable {
         var isCompleted = false
     }

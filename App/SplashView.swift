@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct SplashView: View {
-    let store: Store<SplashStore.State, SplashStore.Action>
+    let store: StoreOf<SplashStore>
     
     var body: some View {
         WithViewStore(store) { viewState in
