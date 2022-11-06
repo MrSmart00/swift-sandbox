@@ -22,11 +22,11 @@ public struct RootView: View {
                             action: Root.Action.splash
                         )
                     )
-                case .content:
+                case .home:
                     ViewFactory.create(
                         store.scope(
-                            state: \.content,
-                            action: Root.Action.content
+                            state: \.home,
+                            action: Root.Action.home
                         )
                     )
                 }

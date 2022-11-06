@@ -10,25 +10,26 @@ import ComposableArchitecture
 
 struct OptionalContent: ReducerProtocol {
     struct State: Equatable {
-        var text: String = "Count -"
+        var text: String {
+            "Count \(count)"
+        }
         var count: Int = 0
     }
     
     enum Action {
         case onAppear
-        case countUp
-        case resetCount
+        case increase
+        case reset
     }
     
     func reduce(into state: inout State, action: Action) -> ComposableArchitecture.EffectTask<Action> {
         switch action {
         case .onAppear:
-            state.text = "Count \(state.count)"
             return .none
-        case .countUp:
+        case .increase:
             state.count += 1
             return .none
-        case .resetCount:
+        case .reset:
             state.count = 0
             return .none
         }

@@ -34,6 +34,7 @@ public struct AppView: View {
                 ._printChanges()
             )
         )
+        .modifier(DebugPresentationModifier())
     }
 }
 

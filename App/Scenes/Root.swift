@@ -11,18 +11,18 @@ import ComposableArchitecture
 struct Root: ReducerProtocol {
     enum Progress {
         case splash
-        case content
+        case home
     }
     
     struct State: Equatable {
         var progress: Progress = .splash
         var splash = Splash.State()
-        var content = Content.State()
+        var home = HomeContent.State()
     }
     
-    enum Action: Equatable {
+    enum Action {
         case splash(Splash.Action)
-        case content(Content.Action)
+        case home(HomeContent.Action)
     }
     
     struct Dependency {
@@ -35,14 +35,14 @@ struct Root: ReducerProtocol {
             Splash(dependency: .init(queue: dependency.queue))
         }
         
-        Scope(state: \.content, action: /Action.content) {
-            Content()
+        Scope(state: \.home, action: /Action.home) {
+            HomeContent()
         }
         
         Reduce { state, action in
             switch action {
             case .splash(let child) where child == .onComplete:
-                state.progress = .content
+                state.progress = .home
             default:
                 break
             }

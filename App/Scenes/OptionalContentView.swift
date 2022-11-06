@@ -19,7 +19,15 @@ struct OptionalContentView: View {
     
     var body: some View {
         WithViewStore(store) { viewStore in
-            Text(viewStore.text)
+            VStack(spacing: 30) {
+                Text(viewStore.text)
+                Button("Incrase") {
+                    viewStore.send(.increase)
+                }
+                Button("Reset") {
+                    viewStore.send(.reset)
+                }
+            }
         }
     }
 }
