@@ -19,11 +19,14 @@ struct ContentView: View {
     
     var body: some View {
         WithViewStore(store) { viewStore in
-            VStack {
+            VStack(spacing: 30) {
                 Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                 Text(viewStore.text)
+                Button("Optional Content") {
+                    viewStore.send(.showOptionalContent)
+                }
             }
             .padding()
             .onAppear {

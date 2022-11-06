@@ -15,12 +15,15 @@ struct Content: ReducerProtocol {
     
     enum Action {
         case onAppear
+        case showOptionalContent
     }
     
     func reduce(into state: inout State, action: Action) -> ComposableArchitecture.EffectTask<Action> {
         switch action {
         case .onAppear:
             state.text = "Hello, world!!!"
+            return .none
+        case .showOptionalContent:
             return .none
         }
     }
