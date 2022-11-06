@@ -30,8 +30,11 @@ public struct AppView: View {
                 reducer: Root(
                     dependency: .init(queue: injection.queue.eraseToAnyScheduler())
                 )
+                .signpost()
+                ._printChanges()
             )
         )
+        .modifier(DebugPresentationModifier())
     }
 }
 
