@@ -14,7 +14,7 @@ struct HomeContent: ReducerProtocol {
         var optionalContent: OptionalContent.State?
     }
     
-    enum Action {
+    enum Action: Equatable {
         case onAppear
         case toggleShowSheet
         case optionalContent(OptionalContent.Action)

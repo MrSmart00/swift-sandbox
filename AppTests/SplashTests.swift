@@ -15,9 +15,8 @@ final class SplashTests: XCTestCase {
     func test_Splash_Reducer() async {
         let testQueue = DispatchQueue.test
         let store = TestStore(
-            initialState: SplashStore.State(),
-            reducer: SplashStore.reducer,
-            environment: SplashStore.Dependency(queue: testQueue.eraseToAnyScheduler())
+            initialState: Splash.State(),
+            reducer: Splash(dependency: .init(queue: testQueue.eraseToAnyScheduler()))
         )
         
         _ = await store.send(.onAppear)

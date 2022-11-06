@@ -20,7 +20,7 @@ struct Root: ReducerProtocol {
         var home = HomeContent.State()
     }
     
-    enum Action {
+    enum Action: Equatable {
         case splash(Splash.Action)
         case home(HomeContent.Action)
     }
