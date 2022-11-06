@@ -9,13 +9,13 @@ import SwiftUI
 import ComposableArchitecture
 
 extension ViewFactory {
-    static func create(_ store: StoreOf<SplashStore>) -> some View {
+    static func create(_ store: StoreOf<Splash>) -> some View {
         SplashView(store: store)
     }
 }
 
 struct SplashView: View {
-    let store: StoreOf<SplashStore>
+    let store: StoreOf<Splash>
     
     var body: some View {
         WithViewStore(store) { viewState in
@@ -40,8 +40,7 @@ struct SplashView_Previews: PreviewProvider {
         SplashView(
             store: .init(
                 initialState: .init(),
-                reducer: SplashStore.reducer,
-                environment: .init(queue: .main)
+                reducer: Splash(dependency: .init(queue: .main))
             )
         )
     }

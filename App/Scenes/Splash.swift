@@ -1,5 +1,5 @@
 //
-//  SplashStore.swift
+//  Splash.swift
 //  App
 //
 //  Created by 日野森寛也 on 2022/10/02.
@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-enum SplashStore: StoreProtocol {
+struct Splash: ReducerProtocol {
     struct State: Equatable {
         
     }
@@ -26,7 +26,9 @@ enum SplashStore: StoreProtocol {
         }
     }
     
-    static let reducer = Reducer<State, Action, Dependency> { state, action, dependency in
+    let dependency: Dependency
+    
+    func reduce(into state: inout State, action: Action) -> ComposableArchitecture.EffectTask<Action> {
         enum CancelID {}
         
         switch action {

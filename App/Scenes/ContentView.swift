@@ -9,14 +9,13 @@ import SwiftUI
 import ComposableArchitecture
 
 extension ViewFactory {
-    static func create(_ store: StoreOf<ContentStore>) -> some View {
+    static func create(_ store: StoreOf<Content>) -> some View {
         ContentView(store: store)
     }
 }
 
 struct ContentView: View {
-    
-    let store: StoreOf<ContentStore>
+    let store: StoreOf<Content>
     
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -39,8 +38,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(
             store: .init(
                 initialState: .init(),
-                reducer: ContentStore.reducer,
-                environment: .init()
+                reducer: Content()
             )
         )
     }

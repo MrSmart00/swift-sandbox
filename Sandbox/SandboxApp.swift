@@ -14,7 +14,7 @@ struct SandboxApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            RootView(with: .init(queue: .main))
+            AppView(injection: .init(queue: .main))
         }
     }
 }
