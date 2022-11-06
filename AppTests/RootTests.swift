@@ -15,26 +15,30 @@ final class RootTests: XCTestCase {
     func test_Root_Reducer_Splash() async {
         let testQueue = DispatchQueue.test
         let store = TestStore(
-            initialState: RootStore.State(),
-            reducer: RootStore.reducer,
-            environment: RootStore.Dependency(queue: testQueue.eraseToAnyScheduler())
+            initialState: Root.State(),
+            reducer: Root(dependency: .init(queue: testQueue.eraseToAnyScheduler()))
         )
         _ = await store.send(.splash(.onAppear))
         await testQueue.advance(by: .seconds(1))
         await store.receive(.splash(.onComplete)) {
-            $0.splash.isCompleted = true
+            $0.progress = .home
         }
     }
 
     func test_Root_Reducer_Content() async {
         let testQueue = DispatchQueue.test
         let store = TestStore(
-            initialState: RootStore.State(),
-            reducer: RootStore.reducer,
-            environment: RootStore.Dependency(queue: testQueue.eraseToAnyScheduler())
+            initialState: Root.State(),
+            reducer: Root(dependency: .init(queue: testQueue.eraseToAnyScheduler()))
         )
-        _ = await store.send(.content(.onAppear)) {
-            $0.content.text = "Hello, world!!!"
+        _ = await store.send(.home(.onAppear)) {
+            $0.home.text = "Hello, world!!!"
+        }
+        _ = await store.send(.home(.toggleShowSheet)) {
+            $0.home.optionalContent = .init()
+        }
+        _ = await store.send(.home(.toggleShowSheet)) {
+            $0.home.optionalContent = nil
         }
     }
 

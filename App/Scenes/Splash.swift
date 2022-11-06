@@ -13,7 +13,7 @@ struct Splash: ReducerProtocol {
         
     }
     
-    enum Action {
+    enum Action: Equatable {
         case onAppear
         case onComplete
     }
