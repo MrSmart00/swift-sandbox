@@ -43,6 +43,7 @@ struct HomeContentView: View {
                     ) { Text("Navigation Content") }
                 }
             }
+            .navigationViewStyle(.stack)
             .onAppear { viewStore.send(.onAppear) }
             .sheet(isPresented: viewStore.binding(
                 get: { $0.optionalContent != nil },
