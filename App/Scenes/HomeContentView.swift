@@ -19,16 +19,30 @@ struct HomeContentView: View {
     
     var body: some View {
         WithViewStore(store) { viewStore in
-            VStack(spacing: 30) {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text(viewStore.text)
-                Button("Optional Content") {
-                    viewStore.send(.toggleShowSheet)
+            NavigationView {
+                VStack(spacing: 30) {
+                    Image(systemName: "globe")
+                        .imageScale(.large)
+                        .foregroundColor(.accentColor)
+                    Text(viewStore.text)
+                    Button("Optional Content") {
+                        viewStore.send(.toggleShowSheet)
+                    }
+                    
+                    NavigationLink(
+                        destination: IfLetStore(
+                            store.scope(
+                                state: \.featureState,
+                                action: HomeContent.Action.feature
+                            ), then: { FirstFeatureView(store: $0) }
+                        ),
+                        isActive: viewStore.binding(
+                            get: { $0.featureState != nil },
+                            send: HomeContent.Action.showFeature(isActive:)
+                        )
+                    ) { Text("Navigation Content") }
                 }
             }
-            .padding()
             .onAppear { viewStore.send(.onAppear) }
             .sheet(isPresented: viewStore.binding(
                 get: { $0.optionalContent != nil },
