@@ -11,10 +11,8 @@
 		2941432A28E990820035E2D4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2941432928E990820035E2D4 /* IndicatorView.swift */; };
 		2941432C28E9AAFD0035E2D4 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2941432B28E9AAFD0035E2D4 /* SplashView.swift */; };
 		2941432E28E9AB0C0035E2D4 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2941432D28E9AB0C0035E2D4 /* Splash.swift */; };
-		2971F5F628EB10F400D67D11 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2971F5F528EB10F400D67D11 /* FirebaseAnalytics */; };
-		2971F5FA28EB10F400D67D11 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2971F5F928EB10F400D67D11 /* FirebaseCrashlytics */; };
+		29529FCC291BC5BB0089F37D /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 29529FCB291BC5BB0089F37D /* SwiftUINavigation */; };
 		2971F5FC28EB124000D67D11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2971F5FB28EB124000D67D11 /* GoogleService-Info.plist */; };
-		2971F5FE28EB143300D67D11 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2971F5FD28EB143300D67D11 /* FirebaseAuth */; };
 		2972D1532913E8CA00D0F127 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972D1522913E8CA00D0F127 /* ViewFactory.swift */; };
 		297B3BAE28E9CB0B0019411A /* SplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297B3BAD28E9CB0B0019411A /* SplashTests.swift */; };
 		297B3BB028E9CF8B0019411A /* HomeContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297B3BAF28E9CF8B0019411A /* HomeContentTests.swift */; };
@@ -98,8 +96,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2971F5F628EB10F400D67D11 /* FirebaseAnalytics in Frameworks */,
-				2971F5FA28EB10F400D67D11 /* FirebaseCrashlytics in Frameworks */,
 				C4DEA77A28E942D3006C6D02 /* App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,8 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29529FCC291BC5BB0089F37D /* SwiftUINavigation in Frameworks */,
 				C4DEA78028E942F1006C6D02 /* ComposableArchitecture in Frameworks */,
-				2971F5FE28EB143300D67D11 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,8 +234,6 @@
 			);
 			name = Sandbox;
 			packageProductDependencies = (
-				2971F5F528EB10F400D67D11 /* FirebaseAnalytics */,
-				2971F5F928EB10F400D67D11 /* FirebaseCrashlytics */,
 			);
 			productName = Sandbox;
 			productReference = C476EC2028E93FE2009A2559 /* Sandbox.app */;
@@ -261,7 +255,7 @@
 			name = App;
 			packageProductDependencies = (
 				C4DEA77F28E942F1006C6D02 /* ComposableArchitecture */,
-				2971F5FD28EB143300D67D11 /* FirebaseAuth */,
+				29529FCB291BC5BB0089F37D /* SwiftUINavigation */,
 			);
 			productName = App;
 			productReference = C476EC3928E940F1009A2559 /* App.framework */;
@@ -317,7 +311,7 @@
 			mainGroup = C476EC1728E93FE2009A2559;
 			packageReferences = (
 				C476EC3128E940A9009A2559 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				29529FCA291BC3340089F37D /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
 			);
 			productRefGroup = C476EC2128E93FE2009A2559 /* Products */;
 			projectDirPath = "";
@@ -732,12 +726,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		29529FCA291BC3340089F37D /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 0.3.0;
 			};
 		};
 		C476EC3128E940A9009A2559 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
@@ -751,20 +745,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2971F5F528EB10F400D67D11 /* FirebaseAnalytics */ = {
+		29529FCB291BC5BB0089F37D /* SwiftUINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		2971F5F928EB10F400D67D11 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		2971F5FD28EB143300D67D11 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2971F5F428EB10F400D67D11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
+			package = 29529FCA291BC3340089F37D /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
 		};
 		C4DEA77F28E942F1006C6D02 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
