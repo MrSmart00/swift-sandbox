@@ -27,6 +27,32 @@ struct DebugView: View {
                         )
                     )
                 }
+                Group {
+                    NavigationLink("First") {
+                        FirstFeatureView(
+                            store: .init(
+                                initialState: .init(),
+                                reducer: FirstFeature().signpost()._printChanges()
+                            )
+                        )
+                    }
+                    NavigationLink("Second") {
+                        SecondFeatureView(
+                            store: .init(
+                                initialState: .init(),
+                                reducer: SecondFeature().signpost()._printChanges()
+                            )
+                        )
+                    }
+                    NavigationLink("Third") {
+                        ThirdFeatureView(
+                            store: .init(
+                                initialState: .init(),
+                                reducer: ThirdFeature().signpost()._printChanges()
+                            )
+                        )
+                    }
+                }
             }
         }
         .navigationTitle("Debug")

@@ -12,12 +12,15 @@ struct HomeContent: ReducerProtocol {
     struct State: Equatable {
         var text = ""
         var optionalContent: OptionalContent.State?
+        var featureState: FirstFeature.State?
     }
     
     enum Action: Equatable {
         case onAppear
         case toggleShowSheet
         case optionalContent(OptionalContent.Action)
+        case feature(FirstFeature.Action)
+        case showFeature(isActive: Bool)
     }
     
     var body: some ReducerProtocol<State, Action> {
@@ -31,10 +34,18 @@ struct HomeContent: ReducerProtocol {
                 return .none
             case .optionalContent:
                 return .none
+            case .showFeature(let isActive):
+                state.featureState = isActive ? .init() : nil
+                return .none
+            default:
+                return .none
             }
         }
         .ifLet(\.optionalContent, action: /Action.optionalContent) {
             OptionalContent()
+        }
+        .ifLet(\.featureState, action: /Action.feature) {
+            FirstFeature()
         }
     }
 }
