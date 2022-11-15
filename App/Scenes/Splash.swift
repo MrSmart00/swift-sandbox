@@ -18,15 +18,7 @@ struct Splash: ReducerProtocol {
         case onComplete
     }
     
-    struct Dependency {
-        var queue: AnySchedulerOf<DispatchQueue>
-        
-        public init(queue: AnySchedulerOf<DispatchQueue>) {
-            self.queue = queue
-        }
-    }
-    
-    let dependency: Dependency
+    @Dependency(\.mainQueue) var queue
     
     func reduce(into state: inout State, action: Action) -> ComposableArchitecture.EffectTask<Action> {
         enum CancelID {}
@@ -34,7 +26,7 @@ struct Splash: ReducerProtocol {
         switch action {
         case .onAppear:
             return .task {
-                try await dependency.queue.sleep(for: 1)
+                try await queue.sleep(for: 1)
                 return .onComplete
             }
             .cancellable(id: CancelID.self)

@@ -12,7 +12,7 @@ import App
 struct SandboxApp: App {
     var body: some Scene {
         WindowGroup {
-            AppView(injection: .init(queue: .main))
+            AppView()
         }
     }
 }

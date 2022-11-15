@@ -9,44 +9,31 @@ import Foundation
 import ComposableArchitecture
 
 struct Root: ReducerProtocol {
-    enum Progress {
-        case splash
-        case home
+    enum State: Equatable {
+        case splash(Splash.State)
+        case home(HomeContent.State)
     }
-    
-    struct State: Equatable {
-        var progress: Progress = .splash
-        var splash = Splash.State()
-        var home = HomeContent.State()
-    }
-    
+
     enum Action: Equatable {
         case splash(Splash.Action)
         case home(HomeContent.Action)
     }
     
-    struct Dependency {
-        let queue: AnySchedulerOf<DispatchQueue>
-    }
-    let dependency: Dependency
-    
     var body: some ReducerProtocol<State, Action> {
-        Scope(state: \.splash, action: /Action.splash) {
-            Splash(dependency: .init(queue: dependency.queue))
-        }
-        
-        Scope(state: \.home, action: /Action.home) {
-            HomeContent()
-        }
-        
         Reduce { state, action in
             switch action {
-            case .splash(let child) where child == .onComplete:
-                state.progress = .home
+            case .splash(.onComplete):
+                state = .home(.init())
             default:
                 break
             }
             return .none
+        }
+        .ifCaseLet(/State.splash, action: /Action.splash) {
+            Splash()
+        }
+        .ifCaseLet(/State.home, action: /Action.home) {
+            HomeContent()
         }
     }
 }

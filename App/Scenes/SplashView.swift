@@ -40,7 +40,7 @@ struct SplashView_Previews: PreviewProvider {
         SplashView(
             store: .init(
                 initialState: .init(),
-                reducer: Splash(dependency: .init(queue: .main))
+                reducer: Splash()
             )
         )
     }

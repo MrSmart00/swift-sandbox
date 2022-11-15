@@ -8,28 +8,14 @@
 import SwiftUI
 import CombineSchedulers
 
-public struct AppInjection {
-    let queue: DispatchQueue
-    
-    public init(queue: DispatchQueue) {
-        self.queue = queue
-    }
-}
-
 public struct AppView: View {
-    let injection: AppInjection
-    
-    public init(injection: AppInjection) {
-        self.injection = injection
-    }
+    public init() { }
 
     public var body: some View {
         RootView(
             store: .init(
-                initialState: .init(),
-                reducer: Root(
-                    dependency: .init(queue: injection.queue.eraseToAnyScheduler())
-                )
+                initialState: .splash(.init()),
+                reducer: Root()
                 .signpost()
                 ._printChanges()
             )
@@ -40,6 +26,6 @@ public struct AppView: View {
 
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
-        AppView(injection: .init(queue: .main))
+        AppView()
     }
 }

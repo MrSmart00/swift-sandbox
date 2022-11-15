@@ -12,25 +12,15 @@ public struct RootView: View {
     let store: StoreOf<Root>
     
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            ZStack {
-                switch viewStore.state.progress {
-                case .splash:
-                    ViewFactory.create(
-                        store.scope(
-                            state: \.splash,
-                            action: Root.Action.splash
-                        )
-                    )
-                case .home:
-                    ViewFactory.create(
-                        store.scope(
-                            state: \.home,
-                            action: Root.Action.home
-                        )
-                    )
-                }
-            }
+        SwitchStore(store) {
+            CaseLet(
+                state: /Root.State.splash,
+                action: Root.Action.splash
+            ) { ViewFactory.create($0) }
+            CaseLet(
+                state: /Root.State.home,
+                action: Root.Action.home
+            ) { ViewFactory.create($0) }
         }
     }
 }
@@ -39,8 +29,8 @@ struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView(
             store: .init(
-                initialState: .init(),
-                reducer: Root(dependency: .init(queue: .main))
+                initialState: .splash(.init()),
+                reducer: Root()
             )
         )
     }
