@@ -9,6 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 struct OptionalContent: ReducerProtocol {
+    let middleware: SharedValueMiddleware
+    
     struct State: Equatable {
         var text: String {
             "Count \(count)"
@@ -28,9 +30,11 @@ struct OptionalContent: ReducerProtocol {
             return .none
         case .increase:
             state.count += 1
+            middleware.send(count: state.count)
             return .none
         case .reset:
             state.count = 0
+            middleware.send(count: state.count)
             return .none
         }
     }

@@ -7,13 +7,37 @@
 
 import Foundation
 import ComposableArchitecture
+import Combine
+
+class SharedValueMiddleware {
+    private var cancellables = Set<AnyCancellable>()
+    private var currentCount = CurrentValueSubject<Int, Never>(0)
+    
+    func send(count: Int) {
+        currentCount.send(count)
+    }
+    
+    func respondsEvent() async -> Int {
+        await withCheckedContinuation { continuation in
+            currentCount
+                .sink {
+                    continuation.resume(returning: $0)
+                }
+                .store(in: &cancellables)
+        }
+    }
+}
 
 struct FirstFeature: ReducerProtocol {
+    let middleware = SharedValueMiddleware()
+    
     struct State: Equatable {
         var secondState: SecondFeature.State?
     }
     
     enum Action: Equatable {
+        case onAppear
+        case onCatchCount(Int)
         case second(SecondFeature.Action)
         case showSecond(isActive: Bool)
     }
@@ -21,6 +45,14 @@ struct FirstFeature: ReducerProtocol {
     var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                return .run { sender in
+                    let count = await middleware.respondsEvent()
+                    await sender.send(.onCatchCount(count))
+                }
+            case .onCatchCount(let count):
+                print("#### \(count)")
+                return .none
             case .showSecond(let isActive):
                 state.secondState = isActive ? .init() : nil
                 return .none
@@ -31,7 +63,7 @@ struct FirstFeature: ReducerProtocol {
             }
         }
         .ifLet(\.secondState, action: /Action.second) {
-            SecondFeature()
+            SecondFeature(middleware: middleware)
         }
     }
 }

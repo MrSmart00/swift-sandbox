@@ -37,7 +37,7 @@ struct OptionalContentView_Previews: PreviewProvider {
         OptionalContentView(
             store: .init(
                 initialState: .init(),
-                reducer: OptionalContent()
+                reducer: OptionalContent(middleware: .init())
             )
         )
     }

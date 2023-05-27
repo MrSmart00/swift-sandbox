@@ -42,6 +42,6 @@ struct ThirdFeatureView: View {
 
 struct ThirdFeatureView_Previews: PreviewProvider {
     static var previews: some View {
-        ThirdFeatureView(store: .init(initialState: .init(), reducer: ThirdFeature()))
+        ThirdFeatureView(store: .init(initialState: .init(), reducer: ThirdFeature(middleware: .init())))
     }
 }
