@@ -23,7 +23,7 @@ struct DebugView: View {
                     OptionalContentView(
                         store: .init(
                             initialState: .init(),
-                            reducer: OptionalContent().signpost()._printChanges()
+                            reducer: OptionalContent(middleware: .init()).signpost()._printChanges()
                         )
                     )
                 }
@@ -40,7 +40,7 @@ struct DebugView: View {
                         SecondFeatureView(
                             store: .init(
                                 initialState: .init(),
-                                reducer: SecondFeature().signpost()._printChanges()
+                                reducer: SecondFeature(middleware: .init()).signpost()._printChanges()
                             )
                         )
                     }
@@ -48,7 +48,7 @@ struct DebugView: View {
                         ThirdFeatureView(
                             store: .init(
                                 initialState: .init(),
-                                reducer: ThirdFeature().signpost()._printChanges()
+                                reducer: ThirdFeature(middleware: .init()).signpost()._printChanges()
                             )
                         )
                     }

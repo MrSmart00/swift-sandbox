@@ -9,6 +9,8 @@ import Foundation
 import ComposableArchitecture
 
 struct ThirdFeature: ReducerProtocol {
+    let middleware: SharedValueMiddleware
+
     struct State: Equatable {
         var optionalState: OptionalContent.State?
         var count: Int = 0
@@ -35,7 +37,7 @@ struct ThirdFeature: ReducerProtocol {
             }
         }
         .ifLet(\.optionalState, action: /Action.optionalContent) {
-            OptionalContent()
+            OptionalContent(middleware: middleware)
         }
     }
 }

@@ -42,7 +42,7 @@ struct HomeContent: ReducerProtocol {
             }
         }
         .ifLet(\.optionalContent, action: /Action.optionalContent) {
-            OptionalContent()
+            OptionalContent(middleware: .init())
         }
         .ifLet(\.featureState, action: /Action.feature) {
             FirstFeature()

@@ -25,6 +25,9 @@ struct FirstFeatureView: View {
                     send: FirstFeature.Action.showSecond(isActive:)
                 )
             ) { Text("Second") }
+                .onAppear {
+                    viewStore.send(.onAppear)
+                }
         }
         .navigationTitle("First")
     }
